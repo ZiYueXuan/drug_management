@@ -52,9 +52,11 @@ public class InitController {
     @PostMapping("/init/drugs")
     public String initDrugs(int classId){
         List<Classify> classifies = initService.getClassifyByClassId(classId);
-        for (Classify classify:classifies){
-            List<Drug> drugs = DrugUtil.getDrugs(classify.getClassifyId(),1);
-            for (Drug drug:drugs){
+        for (Classify classify:classifies) {
+            final int searchType = 1;
+            List<Drug> drugs = DrugUtil.getDrugs(classify.getClassifyId(), searchType);
+            for (int i=0;i<drugs.size();i+=2) {
+                Drug drug = drugs.get(i);
                 initService.initDrug(drug);
             }
         }

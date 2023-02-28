@@ -20,30 +20,29 @@ import java.util.*;
 public class DrugUtil {
     private static final String appId = "mi86AXN4YlmfNPYy";
     private static final String appSecurity = "mi86AXN4YlmfNPYyQjLSPra67YWBugHB";
-    private static String drugURL = "https://api.shumaidata.com/v10/medical_v2/detail";
-    private static String classURL = "https://api.shumaidata.com/v10/medical_v2/type";
-    private static String drugNameURL = "https://api.shumaidata.com/v10/medical_v2/info";
+    private static final String drugURL = "https://api.shumaidata.com/v10/medical_v2/detail";
+    private static final String classURL = "https://api.shumaidata.com/v10/medical_v2/type";
+    private static final String drugNameURL = "https://api.shumaidata.com/v10/medical_v2/info";
 
     /**
      * 此方法用来爬取药物信息
      */
-    public static List<Drug> getDrugs(String classifyId,int searchType) {
+    public static List<Drug> getDrugs(String classifyId, int searchType) {
         long time = System.currentTimeMillis();
         String sign = encrypt(time);
         Set<String> drugNameSet = getDrugName(classifyId);
         List<Drug> drugs = new ArrayList<>();
-        for (String drugName:drugNameSet) {
-            drugURL = drugURL +
+        for (String drugName : drugNameSet) {
+            String url = drugURL +
                     "?appid=" + appId +
                     "&timestamp=" + time +
                     "&sign=" + sign +
                     "&classifyId=" + classifyId +
                     "&searchType=" + searchType +
                     "&searchKey=" + drugName;
-            JSONObject jsonObject = getJSON(drugURL);
+            JSONObject jsonObject = getJSON(url);
             JSONObject data = jsonObject.getJSONObject("data");
             JSONArray jsonArray = data.getJSONArray("drugList");
-            //System.out.println(jsonArray);
             if (jsonArray!=null) {
                 for (int i = 0; i < jsonArray.size(); i++) {
                     JSONObject jsonObjectI = jsonArray.getJSONObject(i);
@@ -84,11 +83,11 @@ public class DrugUtil {
     public static void getClassify() {
         long time = System.currentTimeMillis();
         String sign = encrypt(time);
-        classURL = classURL +
+        String url = classURL +
                 "?appid=" + appId +
                 "&timestamp=" + time +
                 "&sign=" + sign;
-        JSONObject result = getJSON(classURL);
+        JSONObject result = getJSON(url);
         writeJsonFile(result);
     }
 
@@ -98,16 +97,16 @@ public class DrugUtil {
     private static Set<String> getDrugName(String classifyId) {
         long time = System.currentTimeMillis();
         String sign = encrypt(time);
-        drugNameURL = drugNameURL +
+        String url = drugNameURL +
                 "?appid=" + appId +
                 "&timestamp=" + time +
                 "&sign=" + sign +
                 "&classifyId=" + classifyId;
-        JSONObject jsonObject = getJSON(drugNameURL);
+        JSONObject jsonObject = getJSON(url);
         Set<String> drugNameSet = new HashSet<>();
         JSONObject data = jsonObject.getJSONObject("data");
         JSONArray jsonArray = data.getJSONArray("data");
-        if (jsonArray != null) {
+        if (jsonArray!=null) {
             for (int i = 0; i < jsonArray.size(); i++) {
                 JSONObject jsonObjectI = jsonArray.getJSONObject(i);
                 String drugName = jsonObjectI.getString("drugName");
@@ -131,11 +130,12 @@ public class DrugUtil {
         HttpPost post = new HttpPost(url);
         CloseableHttpClient client = HttpClients.createDefault();
         try {
+            Thread.sleep(100);
             HttpResponse response = client.execute(post);
             if (response.getStatusLine().getStatusCode() == 200) {
                 result = JSON.parseObject(EntityUtils.toString(response.getEntity(), "UTF-8"));
             }
-        } catch (IOException e) {
+        } catch (IOException | InterruptedException e) {
             e.printStackTrace();
             result.put("error", "连接错误！");
         }
@@ -151,9 +151,9 @@ public class DrugUtil {
         try {
             File file = new File("E:\\Java_Programme\\drug_management\\src\\main\\resources\\templates\\classify.json");
             if (file.exists()) {
-                file.delete();
+                boolean delete = file.delete();
             }
-            file.createNewFile();
+            boolean b = file.createNewFile();
             // 写入文件
             Writer write = new OutputStreamWriter(new FileOutputStream(file), StandardCharsets.UTF_8);
             write.write(content);
