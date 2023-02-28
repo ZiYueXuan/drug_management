@@ -55,8 +55,7 @@ public class InitController {
         for (Classify classify:classifies) {
             final int searchType = 1;
             List<Drug> drugs = DrugUtil.getDrugs(classify.getClassifyId(), searchType);
-            for (int i=0;i<drugs.size();i+=2) {
-                Drug drug = drugs.get(i);
+            for (Drug drug : drugs) {
                 initService.initDrug(drug);
             }
         }

@@ -42,35 +42,37 @@ public class DrugUtil {
                     "&searchKey=" + drugName;
             JSONObject jsonObject = getJSON(url);
             JSONObject data = jsonObject.getJSONObject("data");
-            JSONArray jsonArray = data.getJSONArray("drugList");
-            if (jsonArray!=null) {
-                for (int i = 0; i < jsonArray.size(); i++) {
-                    JSONObject jsonObjectI = jsonArray.getJSONObject(i);
-                    String name = jsonObjectI.getString("drugName");
-                    String drugId = jsonObjectI.getString("drugId");
-                    String specification = jsonObjectI.getString("gg");
-                    String form = jsonObjectI.getString("jx");
-                    String approvalNumber = jsonObjectI.getString("pzwh");
-                    String executiveStandard = jsonObjectI.getString("zxbz");
-                    String producer = jsonObjectI.getString("manu");
-                    String indication = jsonObjectI.getString("syz");
-                    String component = jsonObjectI.getString("zycf");
-                    String interact = jsonObjectI.getString("ywxhzy");
-                    String properties = jsonObjectI.getString("xz");
-                    int number = new Random().nextInt(1000);
-                    float price = jsonObjectI.getFloat("price");
-                    String validityTime = jsonObjectI.getString("yxq");
-                    String usageConsumption = jsonObjectI.getString("yfyl");
-                    String taboo = jsonObjectI.getString("jj");
-                    String adverseReaction = jsonObjectI.getString("blfy");
-                    String storeUp = jsonObjectI.getString("zc");
-                    String matters = jsonObjectI.getString("zysx");
-                    Drug drug = new Drug(1, name, drugId, specification,
-                            form, approvalNumber, executiveStandard, producer,
-                            indication, component, interact, properties, number,
-                            price, validityTime, usageConsumption, taboo,
-                            adverseReaction, storeUp, matters);
-                    drugs.add(drug);
+            if (data != null) {
+                JSONArray jsonArray = data.getJSONArray("drugList");
+                if (jsonArray != null) {
+                    for (int i = 0; i < jsonArray.size(); i++) {
+                        JSONObject jsonObjectI = jsonArray.getJSONObject(i);
+                        String name = jsonObjectI.getString("drugName");
+                        String drugId = jsonObjectI.getString("drugId");
+                        String specification = jsonObjectI.getString("gg");
+                        String form = jsonObjectI.getString("jx");
+                        String approvalNumber = jsonObjectI.getString("pzwh");
+                        String executiveStandard = jsonObjectI.getString("zxbz");
+                        String producer = jsonObjectI.getString("manu");
+                        String indication = jsonObjectI.getString("syz");
+                        String component = jsonObjectI.getString("zycf");
+                        String interact = jsonObjectI.getString("ywxhzy");
+                        String properties = jsonObjectI.getString("xz");
+                        int number = new Random().nextInt(1000);
+                        float price = jsonObjectI.getFloat("price");
+                        String validityTime = jsonObjectI.getString("yxq");
+                        String usageConsumption = jsonObjectI.getString("yfyl");
+                        String taboo = jsonObjectI.getString("jj");
+                        String adverseReaction = jsonObjectI.getString("blfy");
+                        String storeUp = jsonObjectI.getString("zc");
+                        String matters = jsonObjectI.getString("zysx");
+                        Drug drug = new Drug(1, name, drugId, specification,
+                                form, approvalNumber, executiveStandard, producer,
+                                indication, component, interact, properties, number,
+                                price, validityTime, usageConsumption, taboo,
+                                adverseReaction, storeUp, matters);
+                        drugs.add(drug);
+                    }
                 }
             }
         }
@@ -105,12 +107,14 @@ public class DrugUtil {
         JSONObject jsonObject = getJSON(url);
         Set<String> drugNameSet = new HashSet<>();
         JSONObject data = jsonObject.getJSONObject("data");
-        JSONArray jsonArray = data.getJSONArray("data");
-        if (jsonArray!=null) {
-            for (int i = 0; i < jsonArray.size(); i++) {
-                JSONObject jsonObjectI = jsonArray.getJSONObject(i);
-                String drugName = jsonObjectI.getString("drugName");
-                drugNameSet.add(drugName);
+        if (data != null) {
+            JSONArray jsonArray = data.getJSONArray("data");
+            if (jsonArray != null) {
+                for (int i = 0; i < jsonArray.size(); i++) {
+                    JSONObject jsonObjectI = jsonArray.getJSONObject(i);
+                    String drugName = jsonObjectI.getString("drugName");
+                    drugNameSet.add(drugName);
+                }
             }
         }
         return drugNameSet;
@@ -130,12 +134,11 @@ public class DrugUtil {
         HttpPost post = new HttpPost(url);
         CloseableHttpClient client = HttpClients.createDefault();
         try {
-            Thread.sleep(100);
             HttpResponse response = client.execute(post);
             if (response.getStatusLine().getStatusCode() == 200) {
                 result = JSON.parseObject(EntityUtils.toString(response.getEntity(), "UTF-8"));
             }
-        } catch (IOException | InterruptedException e) {
+        } catch (IOException e) {
             e.printStackTrace();
             result.put("error", "连接错误！");
         }
