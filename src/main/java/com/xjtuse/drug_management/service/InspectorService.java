@@ -6,4 +6,6 @@ public interface InspectorService {
     Inspector getInspectorByPhone(String phone);
 
     Inspector getInspectorByMail(String mail);
+
+    void insert(Inspector inspector);
 }

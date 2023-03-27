@@ -21,4 +21,9 @@ public class InspectorServiceImpl implements InspectorService {
     public Inspector getInspectorByMail(String mail) {
         return inspectorMapper.getInspectorByMail(mail);
     }
+
+    @Override
+    public void insert(Inspector inspector) {
+        inspectorMapper.insert(inspector);
+    }
 }

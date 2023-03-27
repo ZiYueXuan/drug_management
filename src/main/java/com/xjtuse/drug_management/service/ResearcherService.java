@@ -6,4 +6,6 @@ public interface ResearcherService {
     Researcher getResearcherByPhone(String phone);
 
     Researcher getResearcherByMail(String mail);
+
+    void insert(Researcher researcher);
 }

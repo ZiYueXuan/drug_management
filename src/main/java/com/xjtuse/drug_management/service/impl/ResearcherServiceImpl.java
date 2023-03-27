@@ -21,4 +21,9 @@ public class ResearcherServiceImpl implements ResearcherService {
     public Researcher getResearcherByMail(String mail) {
         return researcherMapper.getResearcherByMail(mail);
     }
+
+    @Override
+    public void insert(Researcher researcher) {
+        researcherMapper.insert(researcher);
+    }
 }

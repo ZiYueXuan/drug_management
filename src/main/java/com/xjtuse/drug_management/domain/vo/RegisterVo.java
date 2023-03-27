@@ -7,11 +7,11 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class LoginVo {
-    private int identity;
-    private int way;
+public class RegisterVo {
+    private String name;
     private String phone;
     private String mail;
+    private int identity;
     private String verificationCode;
     private String password;
 }

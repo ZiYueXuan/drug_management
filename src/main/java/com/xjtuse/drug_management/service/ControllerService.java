@@ -6,4 +6,6 @@ public interface ControllerService {
     Controller getControllerByPhone(String phone);
 
     Controller getControllerByMail(String mail);
+
+    void insert(Controller controller);
 }

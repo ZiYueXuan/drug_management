@@ -21,4 +21,9 @@ public class ControllerServiceImpl implements ControllerService {
     public Controller getControllerByMail(String mail) {
         return controllerMapper.getControllerByMail(mail);
     }
+
+    @Override
+    public void insert(Controller controller) {
+        controllerMapper.insert(controller);
+    }
 }

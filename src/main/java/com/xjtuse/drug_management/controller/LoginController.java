@@ -31,7 +31,6 @@ public class LoginController {
     @Resource
     private ControllerService controllerService;
 
-
     @PostMapping("/login")
     public MessageVo login(@RequestBody LoginVo loginVo) {
         int identity = loginVo.getIdentity();

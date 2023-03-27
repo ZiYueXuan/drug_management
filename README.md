@@ -16,8 +16,67 @@
 
 ## 需求分析
 
-
-
 ## 数据库设计
 
 ## 接口设计
+
+### 注册界面
+
+1. 发送手机验证码：/api/phone/verificationCode
+
+    - 数据接收：String phone
+    - 数据返回：String verificationCode
+
+2. 发送邮件验证码：/api/mail/verificationCode
+
+    - 数据接收：String mail
+    - 数据返回：String verificationCode
+
+3. 主界面：/api/register
+
+    - 数据接收：
+
+      ```json
+      {
+          "name":"",
+          "phone":"",
+          "mail":"",
+          "identity":"",//1-研究员，2-监察员，3-质检员
+          "verificationCode":""
+          "password":""
+      }
+      ```
+
+    - 数据返回：String result
+
+    - 要求：
+
+        - 注册成功：跳转进用户主界面
+        - 验证码错误：清空验证码
+        - 已注册：跳转登录界面
+
+### 登录界面
+
+1. 发送验证码：/api/verificationCode
+
+    - 数据接收：无
+    - 数据返回：
+
+2. 登录：/api/login
+
+    - 数据接收：
+
+     ```json
+     {
+     	"identity":"",//0-管理员,1-研究员，2-监察员，3-质检员
+         "way":"",//1-手机，2-邮箱
+         "phone":"",
+         "mail":"",
+         "verificationCode":"",
+         "password":""
+     }
+     ```
+
+    - 数据返回：
+
+### 管理员界面
