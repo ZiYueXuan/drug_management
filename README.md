@@ -12,9 +12,53 @@
 
 ## 项目栈
 
+### 前端部分
 
+### 后端部分
+
+- SpringBoot
+- MyBatis
+- MySQL
 
 ## 需求分析
+
+### 业务流程分析
+
+1. 研究员提出查看药物信息的申请
+
+2. 管理员向研究员发放药物
+
+3. 研究员进行药物重定位的相关研究，提交研究报告
+
+4. 监察员对进行的研究进行审核
+
+5. 质控员对重定位药物做最终检测，决定重定位药物是否合格，进行资料补档
+
+### 用例分析
+
+1. 管理员：
+
+<div style="text-align: center;">
+<img src="https://gitee.com/ziyuexuan/image/raw/master/https://gitee.com/ziyuexuan/image/manager.png" alt="image-20230327141426467" style="width:750px" />
+</div>
+
+2. 研究员：
+
+<div style="text-align: center;">
+<img src="https://gitee.com/ziyuexuan/image/raw/master/https://gitee.com/ziyuexuan/image/researcher.png" alt="image-20230327142234547" style="width:750px" />
+</div>
+
+3. 监察员：
+
+<div style="text-align: center;">
+<img src="https://gitee.com/ziyuexuan/image/raw/master/https://gitee.com/ziyuexuan/image/inspector.png" alt="image-20230327142804282" style="width:750px" />
+</div>
+
+4. 质控员：
+
+<div style="text-align: center;">
+<img src="https://gitee.com/ziyuexuan/image/raw/master/https://gitee.com/ziyuexuan/image/controller.png" alt="image-20230327143253272" style="width:750px" />
+</div>
 
 ## 数据库设计
 
@@ -36,47 +80,54 @@
 
     - 数据接收：
 
-      ```json
-      {
-          "name":"",
-          "phone":"",
-          "mail":"",
-          "identity":"",//1-研究员，2-监察员，3-质检员
-          "verificationCode":""
-          "password":""
-      }
-      ```
+```json
+{
+  "name": "",
+  "phone": "",
+  "mail": "",
+  "identity": "",
+  "verificationCode": "",
+  "password": ""
+}
+```
 
-    - 数据返回：String result
+- 数据返回：String result
 
-    - 要求：
+- 要求：
 
-        - 注册成功：跳转进用户主界面
-        - 验证码错误：清空验证码
-        - 已注册：跳转登录界面
+    - 注册成功：跳转进用户主界面
+    - 验证码错误：清空验证码
+    - 已注册：跳转登录界面
 
 ### 登录界面
 
-1. 发送验证码：/api/verificationCode
-
-    - 数据接收：无
-    - 数据返回：
-
-2. 登录：/api/login
+1. 登录：/api/login
 
     - 数据接收：
 
-     ```json
-     {
-     	"identity":"",//0-管理员,1-研究员，2-监察员，3-质检员
-         "way":"",//1-手机，2-邮箱
-         "phone":"",
-         "mail":"",
-         "verificationCode":"",
-         "password":""
-     }
-     ```
+```json
+{
+  "identity": "",
+  "way": "",
+  "phone": "",
+  "mail": "",
+  "verificationCode": "",
+  "password": ""
+}
+```
 
-    - 数据返回：
+- 数据返回：
+
+```json
+{
+  "id": "-1",
+  "name": "null",
+  "result": "登录失败"
+}
+```
+
+- 要求：
+    - 验证码为图形验证码（在前端实现）
 
 ### 管理员界面
+

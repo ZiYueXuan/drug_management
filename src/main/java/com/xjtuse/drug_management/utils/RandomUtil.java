@@ -24,7 +24,7 @@ public class RandomUtil {
                 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'};
         StringBuilder stringBuilder = new StringBuilder();
         for (int i = 0; i < 6; i++) {
-            stringBuilder.append(chars[new Random().nextInt(chars.length)]);
+            stringBuilder.append(chars[random.nextInt(chars.length)]);
         }
         return stringBuilder.toString();
     }
