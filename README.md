@@ -59,8 +59,52 @@
 <div style="text-align: center;">
 <img src="https://gitee.com/ziyuexuan/image/raw/master/https://gitee.com/ziyuexuan/image/controller.png" alt="image-20230327143253272" style="width:750px" />
 </div>
-
 ## 数据库设计
+
+### E-R图
+
+### 具体设计
+
+1. 药物分类Class：
+
+   | 列名   | 类型        | 描述     |
+      | ------ | ----------- | -------- |
+   | <font color="red">**id**</font> | INT         | 分类编号 |
+   | name   | VARCHAR(45) | 分类名称 |
+
+2. 药物小类Classify:
+
+   | 列名                            | 类型         | 描述     |
+      | ------------------------------- | ------------ | -------- |
+   | <font color="red">**id**</font> | INT          | 小类编号 |
+   | name                            | VARCHAR(45)  | 小类名称 |
+   | classify_id                     | VARCHAR(100) | 查询用id |
+   | <font color="green">**class_id**</font>    | INT          | 分类编号 |
+
+3. 药物信息Drug：
+
+   | 列名                            | 类型         | 描述     |
+      | ---- | ---- | ---- |
+   | <font color="red">**id**</font> | INT          | 药物编号 |
+   | name | VARCHAR(450) | 药物名称 |
+   | drugId | VARCHAR(800) | 药物ID |
+   | specification | VARCHAR(1000) | 规格 |
+   | form | VARCHAR(450) | 剂型 |
+   | approvalNumber | VARCHAR(1000) | 批准编号 |
+   | executiveStandard | VARCHAR(1000) | 执行标准 |
+   | producer | VARCHAR(1000) | 生产厂家 |
+   | indication | VARCHAR(1000) | 适应症 |
+   | component | VARCHAR(1000) | 主要成分 |
+   | interact | VARCHAR(1000) | 药物相互作用 |
+   | properties | VARCHAR(1000) | 性状 |
+   | number | INT | 数量 |
+   | price | FLOAT | 价格 |
+   | validityTime | VARCHAR(100) | 有效期 |
+   | usageConsumption | VARCHAR(1000) | 用法用量     |
+   | taboo | VARCHAR(1000) | 禁忌 |
+   | adverseReaction | BLOB | 不良反应 |
+   | storeUp | VARCHAR(1000) | 贮藏 |
+   | matters | VARCHAR(1000) | 注意事项 |
 
 ## 接口设计
 
@@ -68,24 +112,27 @@
 
 1. 发送手机验证码：/api/phone/verificationCode
 
-    - 数据接收：String phone
-    - 数据返回：String verificationCode
 
-2. 发送邮件验证码：/api/mail/verificationCode
+- 数据接收：String phone
+- 数据返回：String verificationCode
 
-    - 数据接收：String mail
-    - 数据返回：String verificationCode
+1. 发送邮件验证码：/api/mail/verificationCode
 
-3. 主界面：/api/register
 
-    - 数据接收：
+- 数据接收：String mail
+- 数据返回：String verificationCode
+
+1. 主界面：/api/register
+
+
+- 数据接收：
 
 ```json
 {
-  "name": "",
-  "phone": "",
-  "mail": "",
-  "identity": "",
+   "name": "",
+   "phone": "",
+   "mail": "",
+   "identity": "",
   "verificationCode": "",
   "password": ""
 }
@@ -103,7 +150,7 @@
 
 1. 登录：/api/login
 
-    - 数据接收：
+- 数据接收：
 
 ```json
 {
@@ -121,13 +168,69 @@
 ```json
 {
   "id": "-1",
-  "name": "null",
-  "result": "登录失败"
+   "name": "null",
+   "result": "登录失败"
 }
 ```
 
 - 要求：
-    - 验证码为图形验证码（在前端实现）
+   - 验证码为图形验证码（在前端实现）
 
 ### 管理员界面
 
+1. 药物信息库建立：/api/manager/addRepository
+
+- 数据接收：
+
+```json
+{
+   "classes": [
+      {
+         "id": "",
+         "name": ""
+      }
+   ]
+}
+```
+
+- 数据返回：
+
+2. 药物数据入库：/api/manager/addDrugs
+
+- 数据接收：
+
+```json
+{
+   "drugs": [
+      {
+         "id": "",
+         "name": "",
+         "specification": "",
+         "form": "",
+         "executiveStandard": "",
+         "approvalNumber": "",
+         "producer": "",
+         "indication": "",
+         "component": "",
+         "interact": "",
+         "properties": "",
+         "number": "",
+         "price": "",
+         "validityTime": "",
+         "useConsumption": "",
+         "taboo": "",
+         "adverseReaction": "",
+         "storeUp": "",
+         "matters": ""
+      }
+   ]
+}
+```
+
+- 数据返回：
+
+### 研究员界面
+
+### 监察员界面
+
+### 质控员界面
