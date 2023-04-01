@@ -14,6 +14,9 @@ public interface ResearcherMapper {
     @Select("SELECT * FROM `researcher` WHERE `mail` = #{mail}")
     Researcher getResearcherByMail(String mail);
 
+    @Select("SELECT * FROM `researcher` WHERE `id` = #{id}")
+    Researcher getResearcherById(int id);
+
     @Insert("INSERT INTO `researcher`(`name`,`password`,`phone`,`mail`)" +
             "VALUES(#{name},#{password},#{phone},#{mail})")
     @Options(useGeneratedKeys = true, keyProperty = "id")

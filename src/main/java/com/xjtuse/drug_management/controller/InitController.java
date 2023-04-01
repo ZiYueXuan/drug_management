@@ -5,6 +5,7 @@ import com.xjtuse.drug_management.domain.pojo.Class;
 import com.xjtuse.drug_management.domain.pojo.Classify;
 import com.xjtuse.drug_management.domain.pojo.Drug;
 import com.xjtuse.drug_management.domain.vo.ClassifyVo;
+import com.xjtuse.drug_management.service.ClassService;
 import com.xjtuse.drug_management.service.InitService;
 import com.xjtuse.drug_management.utils.ClassifyUtil;
 import com.xjtuse.drug_management.utils.DrugUtil;
@@ -21,15 +22,17 @@ import java.util.Set;
 public class InitController {
     @Resource
     private InitService initService;
+    @Resource
+    private ClassService classService;
 
     private final String path = "E:\\Java_Programme\\drug_management\\src\\main\\resources\\templates\\classify.json";
 
     @PostMapping("/init/class")
-    public String initClass(){
+    public String initClass() {
         JSONObject jsonObject = ClassifyUtil.readJsonFile(path);
         Set<String> classes = ClassifyUtil.getClasses(jsonObject);
-        for (String s:classes){
-            Class c = new Class(1,s);
+        for (String s : classes) {
+            Class c = new Class(1, s);
             initService.initClass(c);
         }
         return "药物大类已初始化";
@@ -56,6 +59,8 @@ public class InitController {
             final int searchType = 1;
             List<Drug> drugs = DrugUtil.getDrugs(classify.getClassifyId(), searchType);
             for (Drug drug : drugs) {
+                Class c = classService.getClassById(classId);
+                drug.setC(c);
                 initService.initDrug(drug);
             }
         }

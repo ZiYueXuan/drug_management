@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 public class Drug {
     private long id;//主键
     private String name;//药物名称
+    private Class c;//药物大类名称
     private String drugId;//药品ID
     private String specification;//规格
     private String form;//剂型

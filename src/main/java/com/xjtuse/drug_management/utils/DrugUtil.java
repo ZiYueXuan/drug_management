@@ -60,13 +60,16 @@ public class DrugUtil {
                         String properties = jsonObjectI.getString("xz");
                         int number = new Random().nextInt(1000);
                         float price = jsonObjectI.getFloat("price");
+                        if (price == 0.0) {
+                            price = new Random().nextInt(100);
+                        }
                         String validityTime = jsonObjectI.getString("yxq");
                         String usageConsumption = jsonObjectI.getString("yfyl");
                         String taboo = jsonObjectI.getString("jj");
                         String adverseReaction = jsonObjectI.getString("blfy");
                         String storeUp = jsonObjectI.getString("zc");
                         String matters = jsonObjectI.getString("zysx");
-                        Drug drug = new Drug(1, name, drugId, specification,
+                        Drug drug = new Drug(1, name, 1, drugId, specification,
                                 form, approvalNumber, executiveStandard, producer,
                                 indication, component, interact, properties, number,
                                 price, validityTime, usageConsumption, taboo,

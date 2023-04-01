@@ -26,4 +26,9 @@ public class ResearcherServiceImpl implements ResearcherService {
     public void insert(Researcher researcher) {
         researcherMapper.insert(researcher);
     }
+
+    @Override
+    public Researcher getResearcherById(int researcherId) {
+        return researcherMapper.getResearcherById(researcherId);
+    }
 }

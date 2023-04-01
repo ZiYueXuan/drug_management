@@ -21,6 +21,6 @@ public interface ClassMapper {
     @Select("SELECT * FROM `class` WHERE id = #{id}")
     Class getClassById(long id);
 
-    @Select("SELECT * FROM `class`")
+    @Select("SELECT * FROM `class` WHERE  id < 13")
     List<Class> getAll();
 }

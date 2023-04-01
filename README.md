@@ -65,28 +65,69 @@
 
 ### 具体设计
 
-1. 药物分类Class：
+1. 管理员Manager：
+
+   | 列名                            | 类型        | 描述   |
+      | ------------------------------- | ----------- | ------ |
+   | <font color="red">**id**</font> | INT         | 编号   |
+   | name                            | VARCHAR(45) | 姓名   |
+   | password                        | VARCHAR(45) | 密码   |
+   | phone                           | VARCHAR(45) | 手机号 |
+   | mail                            | VARCHAR(45) | 邮箱   |
+
+2. 研究员Researcher：
+
+   | 列名                            | 类型        | 描述   |
+      | ------------------------------- | ----------- | ------ |
+   | <font color="red">**id**</font> | INT         | 编号   |
+   | name                            | VARCHAR(45) | 姓名   |
+   | password                        | VARCHAR(45) | 密码   |
+   | phone                           | VARCHAR(45) | 手机号 |
+   | mail                            | VARCHAR(45) | 邮箱   |
+
+3. 监察员Inspector：
+
+   | 列名                            | 类型        | 描述   |
+      | ------------------------------- | ----------- | ------ |
+   | <font color="red">**id**</font> | INT         | 编号   |
+   | name                            | VARCHAR(45) | 姓名   |
+   | password                        | VARCHAR(45) | 密码   |
+   | phone                           | VARCHAR(45) | 手机号 |
+   | mail                            | VARCHAR(45) | 邮箱   |
+
+4. 质控员Controller：
+
+   | 列名                            | 类型        | 描述   |
+      | ------------------------------- | ----------- | ------ |
+   | <font color="red">**id**</font> | INT         | 编号   |
+   | name                            | VARCHAR(45) | 姓名   |
+   | password                        | VARCHAR(45) | 密码   |
+   | phone                           | VARCHAR(45) | 手机号 |
+   | mail                            | VARCHAR(45) | 邮箱   |
+
+5. 药物分类Class：
 
    | 列名   | 类型        | 描述     |
-      | ------ | ----------- | -------- |
+                  | ------ | ----------- | -------- |
    | <font color="red">**id**</font> | INT         | 分类编号 |
    | name   | VARCHAR(45) | 分类名称 |
 
-2. 药物小类Classify:
+6. 药物小类Classify:
 
    | 列名                            | 类型         | 描述     |
-      | ------------------------------- | ------------ | -------- |
+                     | ------------------------------- | ------------ | -------- |
    | <font color="red">**id**</font> | INT          | 小类编号 |
    | name                            | VARCHAR(45)  | 小类名称 |
    | classify_id                     | VARCHAR(100) | 查询用id |
    | <font color="green">**class_id**</font>    | INT          | 分类编号 |
 
-3. 药物信息Drug：
+7. 药物信息Drug：
 
    | 列名                            | 类型         | 描述     |
-      | ---- | ---- | ---- |
+         | ---- | ---- | ---- |
    | <font color="red">**id**</font> | INT          | 药物编号 |
    | name | VARCHAR(450) | 药物名称 |
+   | <font color="green">**classId**</font> | INT | 大类编号 |
    | drugId | VARCHAR(800) | 药物ID |
    | specification | VARCHAR(1000) | 规格 |
    | form | VARCHAR(450) | 剂型 |
@@ -108,31 +149,31 @@
 
 ## 接口设计
 
+<font color="blue">数据接收：前端 ---> 后端 </font>
+<font color="blue">数据返回：后端 ---> 前端</font>
+
 ### 注册界面
 
 1. 发送手机验证码：/api/phone/verificationCode
 
-
 - 数据接收：String phone
 - 数据返回：String verificationCode
 
-1. 发送邮件验证码：/api/mail/verificationCode
-
+2. 发送邮件验证码：/api/mail/verificationCode
 
 - 数据接收：String mail
 - 数据返回：String verificationCode
 
-1. 主界面：/api/register
-
+3. 主界面：/api/register
 
 - 数据接收：
 
 ```json
 {
-   "name": "",
-   "phone": "",
-   "mail": "",
-   "identity": "",
+  "name": "",
+  "phone": "",
+  "mail": "",
+  "identity": "",
   "verificationCode": "",
   "password": ""
 }
@@ -168,68 +209,102 @@
 ```json
 {
   "id": "-1",
-   "name": "null",
-   "result": "登录失败"
+  "name": "null",
+  "result": "登录失败"
 }
 ```
 
 - 要求：
-   - 验证码为图形验证码（在前端实现）
+    - 验证码为图形验证码（在前端实现）
 
 ### 管理员界面
 
-1. 药物信息库建立：/api/manager/addRepository
+1. 药物信息库获取：/api/manager/getRepositories
 
-- 数据接收：
-
-```json
-{
-   "classes": [
-      {
-         "id": "",
-         "name": ""
-      }
-   ]
-}
-```
+- 数据接收：无
 
 - 数据返回：
 
-2. 药物数据入库：/api/manager/addDrugs
-
-- 数据接收：
-
 ```json
 {
-   "drugs": [
-      {
-         "id": "",
-         "name": "",
-         "specification": "",
-         "form": "",
-         "executiveStandard": "",
-         "approvalNumber": "",
-         "producer": "",
-         "indication": "",
-         "component": "",
-         "interact": "",
-         "properties": "",
-         "number": "",
-         "price": "",
-         "validityTime": "",
-         "useConsumption": "",
-         "taboo": "",
-         "adverseReaction": "",
-         "storeUp": "",
-         "matters": ""
-      }
-   ]
+  "classes": [
+    {
+      "id": "",
+      "name": ""
+    }
+  ]
 }
 ```
 
+2. 药物信息库建立：/api/manager/addRepository
+
+- 数据接收：String className
+
+- 数据返回：String result
+
+3. 药物数据获取：/api/manager/getDrugs
+
+- 数据接收：String className
+
 - 数据返回：
+
+```json
+{
+  "drugs": [
+    {
+      "id": "",
+      "name": "",
+      "drugId": "",
+      "specification": "",
+      "form": "",
+      "executiveStandard": "",
+      "approvalNumber": "",
+      "producer": "",
+      "indication": "",
+      "component": "",
+      "interact": "",
+      "properties": "",
+      "number": "",
+      "price": "",
+      "validityTime": "",
+      "useConsumption": "",
+      "taboo": "",
+      "adverseReaction": "",
+      "storeUp": "",
+      "matters": ""
+    }
+  ]
+}
+```
+
+- 要求：
+   - 空值不必展示
 
 ### 研究员界面
+
+1. 研究药物申请：/api/researcher/drugApply
+
+- 数据接收：
+
+```json
+{
+    "researcher_id":"",
+    "drug_id":"",
+    "number":"",
+    "status":""
+}
+```
+
+- 数据返回：String result
+
+2. 历史申请记录：/api/researcher/getApplies
+
+- 数据接收：int researcherId
+- 数据返回：
+
+```json
+
+```
 
 ### 监察员界面
 

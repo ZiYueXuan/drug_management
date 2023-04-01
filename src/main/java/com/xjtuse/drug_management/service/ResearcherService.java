@@ -8,4 +8,6 @@ public interface ResearcherService {
     Researcher getResearcherByMail(String mail);
 
     void insert(Researcher researcher);
+
+    Researcher getResearcherById(int researcherId);
 }
