@@ -11,11 +11,12 @@ public interface ClassifyMapper {
 
     @Insert("INSERT INTO `classify`(`class_id`,`name`,`classifyId`) " +
             "VALUES (#{c.id},#{name},#{classifyId})")
-    @Options(useGeneratedKeys = true,keyProperty = "id")
+    @Results(id = "classifyMapper")
+    @Options(useGeneratedKeys = true, keyProperty = "id")
     void insert(Classify classify);
 
     @Select("SELECT * FROM `classify` WHERE `class_id` = #{classId}")
-    @Results(id = "classifyMap",value ={
+    @Results(id = "classifyMapper", value = {
             @Result(property = "c",
                     column = "class_id",
                     javaType = Class.class,

@@ -7,7 +7,6 @@ import com.xjtuse.drug_management.domain.pojo.Class;
 import com.xjtuse.drug_management.domain.pojo.Classify;
 import com.xjtuse.drug_management.domain.pojo.Drug;
 import com.xjtuse.drug_management.service.InitService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

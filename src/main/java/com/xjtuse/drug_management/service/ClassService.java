@@ -7,4 +7,8 @@ import java.util.List;
 
 public interface ClassService {
     List<Class> getAll();
+
+    Class getClassById(int classId);
+
+    void add(Class c);
 }
