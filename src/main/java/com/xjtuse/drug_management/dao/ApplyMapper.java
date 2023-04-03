@@ -14,7 +14,7 @@ public interface ApplyMapper {
     @Options(useGeneratedKeys = true, keyProperty = "id")
     void insert(Apply apply);
 
-    @Select("SELECT * FROM `apply`")
+    @Select("SELECT * FROM `apply` WHERE `researcher_id` = #{researcherId}")
     @Results(id = "applyMapper", value = {
             @Result(property = "researcher",
                     column = "researcher_id",
@@ -27,8 +27,9 @@ public interface ApplyMapper {
                     one = @One(select = "com.xjtuse.drug_management.dao.DrugMapper.getDrugById")
             )
     })
-    List<Apply> getApplies();
+    List<Apply> getApplies(int researcherId);
 
-    @Select("SELECT * FROM `apply` WHERE `status` = #{status} ")
-    List<Apply> getApplies(int status);
+    @Select("SELECT * FROM `apply` WHERE `researcher_id` = #{researcherId} AND `status` = #{status} ")
+    @Results(id = "applyMapper")
+    List<Apply> getApplies(int researcherId, int status);
 }

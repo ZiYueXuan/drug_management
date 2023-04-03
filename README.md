@@ -303,7 +303,17 @@
 - 数据返回：
 
 ```json
-
+{
+    "applyList":[
+        {
+            "id":"",
+            "researcher":"",
+            "drug":"",
+            "number":"",
+            "status":""
+        }
+    ]
+}
 ```
 
 ### 监察员界面

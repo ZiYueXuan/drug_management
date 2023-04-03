@@ -19,12 +19,12 @@ public class ApplyServiceImpl implements ApplyService {
     }
 
     @Override
-    public List<Apply> getApplies() {
-        return applyMapper.getApplies();
+    public List<Apply> getApplies(int researcherId) {
+        return applyMapper.getApplies(researcherId);
     }
 
     @Override
-    public List<Apply> getApplies(int status) {
-        return applyMapper.getApplies(status);
+    public List<Apply> getApplies(int researcherId, int status) {
+        return applyMapper.getApplies(researcherId, status);
     }
 }

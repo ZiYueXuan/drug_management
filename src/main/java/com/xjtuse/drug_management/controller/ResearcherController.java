@@ -36,12 +36,12 @@ public class ResearcherController {
     }
 
     @PostMapping("/researcher/getApplies")
-    public List<Apply> getApplies() {
-        return applyService.getApplies();
+    public List<Apply> getApplies(@RequestParam int researcherId) {
+        return applyService.getApplies(researcherId);
     }
 
     @PostMapping("/researcher/getApplies")
-    public List<Apply> getApplies(@RequestParam int status) {
-        return applyService.getApplies(status);
+    public List<Apply> getApplies(@RequestParam int researcherId, @RequestParam int status) {
+        return applyService.getApplies(researcherId, status);
     }
 }

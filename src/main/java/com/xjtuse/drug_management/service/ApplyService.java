@@ -7,7 +7,7 @@ import java.util.List;
 public interface ApplyService {
     void insert(Apply apply);
 
-    List<Apply> getApplies();
+    List<Apply> getApplies(int researcherId);
 
-    List<Apply> getApplies(int status);
+    List<Apply> getApplies(int researcherId, int status);
 }
