@@ -27,4 +27,14 @@ public class ApplyServiceImpl implements ApplyService {
     public List<Apply> getApplies(int researcherId, int status) {
         return applyMapper.getApplies(researcherId, status);
     }
+
+    @Override
+    public List<Apply> getApplies() {
+        return applyMapper.getApplies();
+    }
+
+    @Override
+    public void updateStatus(Apply apply) {
+        applyMapper.updateStatus(apply);
+    }
 }

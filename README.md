@@ -59,6 +59,7 @@
 <div style="text-align: center;">
 <img src="https://gitee.com/ziyuexuan/image/raw/master/https://gitee.com/ziyuexuan/image/controller.png" alt="image-20230327143253272" style="width:750px" />
 </div>
+
 ## 数据库设计
 
 ### E-R图
@@ -156,36 +157,58 @@
 
 1. 发送手机验证码：/api/phone/verificationCode
 
-- 数据接收：String phone
-- 数据返回：String verificationCode
+- 数据接收：
+
+| 参数名 | 参数值 | 类型   |
+| ------ | ------ | ------ |
+| phone  |        | string |
+
+- 数据返回：
+
+| 参数名           | 参数值 | 类型   |
+| ---------------- | ------ | ------ |
+| verificationCode |        | string |
 
 2. 发送邮件验证码：/api/mail/verificationCode
 
-- 数据接收：String mail
-- 数据返回：String verificationCode
+- 数据接收：
 
-3. 主界面：/api/register
+| 参数名 | 参数值 | 类型   |
+| ------ | ------ | ------ |
+| mail   |        | string |
+
+- 数据返回：
+
+| 参数名           | 参数值 | 类型   |
+| ---------------- | ------ | ------ |
+| verificationCode |        | string |
+
+3. 注册：/api/register
 
 - 数据接收：
 
 ```json
 {
-  "name": "",
-  "phone": "",
-  "mail": "",
-  "identity": "",
-  "verificationCode": "",
-  "password": ""
+   "name": "",
+   "phone": "",
+   "mail": "",
+   "identity": "",
+   "verificationCode": "",
+   "password": ""
 }
 ```
 
-- 数据返回：String result
+- 数据返回：
+
+| 参数名 | 参数值 | 类型   |
+| ------ | ------ | ------ |
+| result |        | string |
 
 - 要求：
 
-    - 注册成功：跳转进用户主界面
-    - 验证码错误：清空验证码
-    - 已注册：跳转登录界面
+   - 注册成功：跳转进用户主界面
+   - 验证码错误：清空验证码
+   - 已注册：跳转登录界面
 
 ### 登录界面
 
@@ -228,33 +251,45 @@
 ```json
 {
   "classes": [
-    {
-      "id": "",
-      "name": ""
-    }
+     {
+        "id": "",
+        "name": ""
+     }
   ]
 }
 ```
 
 2. 药物信息库建立：/api/manager/addRepository
 
-- 数据接收：String className
+- 数据接收：
 
-- 数据返回：String result
+| 参数名    | 参数值 | 类型   |
+| --------- | ------ | ------ |
+| className |        | string |
+
+- 数据返回：
+
+| 参数名 | 参数值 | 类型   |
+| ------ | ------ | ------ |
+| result |        | string |
 
 3. 药物数据获取：/api/manager/getDrugs
 
-- 数据接收：String className
+- 数据接收：
+
+| 参数名    | 参数值 | 类型   |
+| --------- | ------ | ------ |
+| className |        | string |
 
 - 数据返回：
 
 ```json
 {
-  "drugs": [
-    {
-      "id": "",
-      "name": "",
-      "drugId": "",
+   "drugs": [
+      {
+         "id": "",
+         "name": "",
+         "drugId": "",
       "specification": "",
       "form": "",
       "executiveStandard": "",
@@ -270,15 +305,50 @@
       "useConsumption": "",
       "taboo": "",
       "adverseReaction": "",
-      "storeUp": "",
-      "matters": ""
-    }
-  ]
+         "storeUp": "",
+         "matters": ""
+      }
+   ]
 }
 ```
 
 - 要求：
    - 空值不必展示
+
+4. 查看研究员药物申请：/api/manager/getApplies
+
+- 数据接收：
+
+| 参数名      | 参数值 | 类型   |
+| ----------- | ------ | ------ |
+| status      | 1      | number |
+| <font color="blue">researcherId</font> |        | <font color="blue">number</font> |
+
+- 数据返回：
+
+```json
+{
+   "applyList": [
+      {
+         "id": "",
+         "researcher": "",
+         "drug": "",
+         "number": "",
+         "status": ""
+      }
+   ]
+}
+```
+
+4. 审核申请：/api/manager/exeApply
+
+- 数据接收：Apply 对象
+
+- 数据返回：
+
+| 参数名 | 参数值 | 类型   |
+| ------ | ------ | ------ |
+| result |        | string |
 
 ### 研究员界面
 
@@ -288,10 +358,10 @@
 
 ```json
 {
-    "researcher_id":"",
-    "drug_id":"",
-    "number":"",
-    "status":""
+   "researcher_id": "",
+   "drug_id": "",
+   "number": "",
+   "status": ""
 }
 ```
 
@@ -299,16 +369,22 @@
 
 2. 历史申请记录：/api/researcher/getApplies
 
-- 数据接收：int researcherId
+- 数据接收：
+
+| 参数名                           | 参数值       | 类型                             |
+| -------------------------------- | ------------ | -------------------------------- |
+| researcherId                     | 当前研究者id | number                           |
+| <font color="blue">status</font> |              | <font color="blue">number</font> |
+
 - 数据返回：
 
 ```json
 {
-    "applyList":[
-        {
-            "id":"",
-            "researcher":"",
-            "drug":"",
+   "applyList": [
+      {
+         "id": "",
+         "researcher": "",
+         "drug": "",
             "number":"",
             "status":""
         }

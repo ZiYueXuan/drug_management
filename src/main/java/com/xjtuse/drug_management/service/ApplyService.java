@@ -10,4 +10,8 @@ public interface ApplyService {
     List<Apply> getApplies(int researcherId);
 
     List<Apply> getApplies(int researcherId, int status);
+
+    List<Apply> getApplies();
+
+    void updateStatus(Apply apply);
 }

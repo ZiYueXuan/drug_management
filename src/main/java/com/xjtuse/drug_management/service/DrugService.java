@@ -8,4 +8,6 @@ public interface DrugService {
     List<Drug> getDrugByClass(int classId);
 
     Drug getDrugById(int drugId);
+
+    void updateNumber(Drug drug, int number);
 }
