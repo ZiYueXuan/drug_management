@@ -7,8 +7,8 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class MessageVo {
-    private long id;
-    private String name;
-    private String result;
+public class ClassifyVO {
+    private String classifyName;
+    private String classifyId;
+    private String classZ;
 }

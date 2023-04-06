@@ -4,8 +4,8 @@ import com.xjtuse.drug_management.domain.pojo.Controller;
 import com.xjtuse.drug_management.domain.pojo.Inspector;
 import com.xjtuse.drug_management.domain.pojo.Manager;
 import com.xjtuse.drug_management.domain.pojo.Researcher;
-import com.xjtuse.drug_management.domain.vo.LoginVo;
-import com.xjtuse.drug_management.domain.vo.MessageVo;
+import com.xjtuse.drug_management.domain.vo.LoginVO;
+import com.xjtuse.drug_management.domain.vo.MessageVO;
 import com.xjtuse.drug_management.service.ControllerService;
 import com.xjtuse.drug_management.service.InspectorService;
 import com.xjtuse.drug_management.service.ManagerService;
@@ -20,7 +20,7 @@ import javax.annotation.Resource;
 @RestController
 @RequestMapping("/api")
 public class LoginController {
-    private MessageVo messageVo;
+    private MessageVO messageVo;
 
     @Resource
     private ManagerService managerService;
@@ -32,7 +32,7 @@ public class LoginController {
     private ControllerService controllerService;
 
     @PostMapping("/login")
-    public MessageVo login(@RequestBody LoginVo loginVo) {
+    public MessageVO login(@RequestBody LoginVO loginVo) {
         int identity = loginVo.getIdentity();
         int way = loginVo.getWay();
         String password = loginVo.getPassword();
@@ -43,7 +43,7 @@ public class LoginController {
                 if (manager != null) {
                     checkManager(password, manager);
                 } else {
-                    messageVo = new MessageVo(-1, "", "请先注册！！！");
+                    messageVo = new MessageVO(-1, "", "请先注册！！！");
                 }
             } else if (way == 2) {//邮箱登录
                 String mail = loginVo.getMail();
@@ -51,7 +51,7 @@ public class LoginController {
                 if (manager != null) {
                     checkManager(password, manager);
                 } else {
-                    messageVo = new MessageVo(-1, "", "请先注册！！！");
+                    messageVo = new MessageVO(-1, "", "请先注册！！！");
                 }
             }
         } else if (identity == 1) {//研究员
@@ -61,7 +61,7 @@ public class LoginController {
                 if (researcher != null) {
                     checkResearcher(password, researcher);
                 } else {
-                    messageVo = new MessageVo(-1, "", "请先注册！！！");
+                    messageVo = new MessageVO(-1, "", "请先注册！！！");
                 }
             } else if (way == 2) {//邮箱登录
                 String mail = loginVo.getMail();
@@ -69,7 +69,7 @@ public class LoginController {
                 if (researcher != null) {
                     checkResearcher(password, researcher);
                 } else {
-                    messageVo = new MessageVo(-1, "", "请先注册！！！");
+                    messageVo = new MessageVO(-1, "", "请先注册！！！");
                 }
             }
         } else if (identity == 2) {//监察员
@@ -79,7 +79,7 @@ public class LoginController {
                 if (inspector != null) {
                     checkInspector(password, inspector);
                 } else {
-                    messageVo = new MessageVo(-1, "", "请先注册！！！");
+                    messageVo = new MessageVO(-1, "", "请先注册！！！");
                 }
             } else if (way == 2) {//邮箱登录
                 String mail = loginVo.getMail();
@@ -87,7 +87,7 @@ public class LoginController {
                 if (inspector != null) {
                     checkInspector(password, inspector);
                 } else {
-                    messageVo = new MessageVo(-1, "", "请先注册！！！");
+                    messageVo = new MessageVO(-1, "", "请先注册！！！");
                 }
             }
         } else if (identity == 3) {//质控员
@@ -97,7 +97,7 @@ public class LoginController {
                 if (controller != null) {
                     checkController(password, controller);
                 } else {
-                    messageVo = new MessageVo(-1, "", "请先注册！！！");
+                    messageVo = new MessageVO(-1, "", "请先注册！！！");
                 }
             } else if (way == 2) {//邮箱登录
                 String mail = loginVo.getMail();
@@ -105,44 +105,44 @@ public class LoginController {
                 if (controller != null) {
                     checkController(password, controller);
                 } else {
-                    messageVo = new MessageVo(-1, "", "请先注册！！！");
+                    messageVo = new MessageVO(-1, "", "请先注册！！！");
                 }
             }
         } else {
-            messageVo = new MessageVo(0, "", "未知错误");
+            messageVo = new MessageVO(0, "", "未知错误");
         }
         return messageVo;
     }
 
     private void checkManager(String password, Manager manager) {
         if (manager.getPassword().equals(password)) {
-            messageVo = new MessageVo(manager.getId(), manager.getName(), "登录成功！");
+            messageVo = new MessageVO(manager.getId(), manager.getName(), "登录成功！");
         } else {
-            messageVo = new MessageVo(0, "", "用户名或密码错误");
+            messageVo = new MessageVO(0, "", "用户名或密码错误");
         }
     }
 
     private void checkResearcher(String password, Researcher researcher) {
         if (researcher.getPassword().equals(password)) {
-            messageVo = new MessageVo(researcher.getId(), researcher.getName(), "登录成功！");
+            messageVo = new MessageVO(researcher.getId(), researcher.getName(), "登录成功！");
         } else {
-            messageVo = new MessageVo(0, "", "用户名或密码错误!!!");
+            messageVo = new MessageVO(0, "", "用户名或密码错误!!!");
         }
     }
 
     private void checkInspector(String password, Inspector inspector) {
         if (inspector.getPassword().equals(password)) {
-            messageVo = new MessageVo(inspector.getId(), inspector.getName(), "登录成功！");
+            messageVo = new MessageVO(inspector.getId(), inspector.getName(), "登录成功！");
         } else {
-            messageVo = new MessageVo(0, "", "用户名或密码错误!!!");
+            messageVo = new MessageVO(0, "", "用户名或密码错误!!!");
         }
     }
 
     private void checkController(String password, Controller controller) {
         if (controller.getPassword().equals(password)) {
-            messageVo = new MessageVo(controller.getId(), controller.getName(), "登录成功！");
+            messageVo = new MessageVO(controller.getId(), controller.getName(), "登录成功！");
         } else {
-            messageVo = new MessageVo(0, "", "用户名或密码错误!!!");
+            messageVo = new MessageVO(0, "", "用户名或密码错误!!!");
         }
     }
 }

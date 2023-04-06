@@ -26,4 +26,9 @@ public class InspectorServiceImpl implements InspectorService {
     public void insert(Inspector inspector) {
         inspectorMapper.insert(inspector);
     }
+
+    @Override
+    public Inspector getInspectorById(int inspector_id) {
+        return inspectorMapper.getInspectorById(inspector_id);
+    }
 }

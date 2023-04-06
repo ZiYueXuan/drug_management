@@ -8,7 +8,7 @@ import com.apistd.uni.sms.UniSMS;
 import com.xjtuse.drug_management.domain.pojo.Controller;
 import com.xjtuse.drug_management.domain.pojo.Inspector;
 import com.xjtuse.drug_management.domain.pojo.Researcher;
-import com.xjtuse.drug_management.domain.vo.RegisterVo;
+import com.xjtuse.drug_management.domain.vo.RegisterVO;
 import com.xjtuse.drug_management.service.ControllerService;
 import com.xjtuse.drug_management.service.InspectorService;
 import com.xjtuse.drug_management.service.ResearcherService;
@@ -25,7 +25,10 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 import java.io.UnsupportedEncodingException;
-import java.util.*;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Properties;
 
 @RestController
 @RequestMapping("/api")
@@ -104,7 +107,7 @@ public class RegisterController {
     }
 
     @PostMapping("/register")
-    public String register(RegisterVo registerVo) {
+    public String register(RegisterVO registerVo) {
         String result = "注册成功！";
         String code = registerVo.getVerificationCode();
         int identity = registerVo.getIdentity();

@@ -4,7 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.xjtuse.drug_management.domain.pojo.Class;
 import com.xjtuse.drug_management.domain.pojo.Classify;
 import com.xjtuse.drug_management.domain.pojo.Drug;
-import com.xjtuse.drug_management.domain.vo.ClassifyVo;
+import com.xjtuse.drug_management.domain.vo.ClassifyVO;
 import com.xjtuse.drug_management.service.ClassService;
 import com.xjtuse.drug_management.service.InitService;
 import com.xjtuse.drug_management.utils.ClassifyUtil;
@@ -39,14 +39,14 @@ public class InitController {
     }
 
     @PostMapping("/init/classify")
-    public String initClassify(){
+    public String initClassify() {
         JSONObject jsonObject = ClassifyUtil.readJsonFile(path);
-        List<ClassifyVo> classifyVoList = ClassifyUtil.getClassifyVo(jsonObject);
-        for (ClassifyVo classifyVo:classifyVoList){
+        List<ClassifyVO> classifyVoList = ClassifyUtil.getClassifyVo(jsonObject);
+        for (ClassifyVO classifyVo : classifyVoList) {
             Class c = initService.getClassByName(classifyVo.getClassZ());
             String name = classifyVo.getClassifyName();
             String classifyId = classifyVo.getClassifyId();
-            Classify classify = new Classify(1,c,name,classifyId);
+            Classify classify = new Classify(1, c, name, classifyId);
             initService.initClassify(classify);
         }
         return "药物小类已初始化";
@@ -66,4 +66,6 @@ public class InitController {
         }
         return "Class"+classId+"所属药物已插入";
     }
+
+
 }

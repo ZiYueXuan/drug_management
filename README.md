@@ -99,7 +99,7 @@
 4. 质控员Controller：
 
    | 列名                            | 类型        | 描述   |
-      | ------------------------------- | ----------- | ------ |
+         | ------------------------------- | ----------- | ------ |
    | <font color="red">**id**</font> | INT         | 编号   |
    | name                            | VARCHAR(45) | 姓名   |
    | password                        | VARCHAR(45) | 密码   |
@@ -108,45 +108,69 @@
 
 5. 药物分类Class：
 
-   | 列名   | 类型        | 描述     |
-                  | ------ | ----------- | -------- |
+   | 列名                            | 类型        | 描述     |
+         | ------------------------------- | ----------- | -------- |
    | <font color="red">**id**</font> | INT         | 分类编号 |
-   | name   | VARCHAR(45) | 分类名称 |
+   | name                            | VARCHAR(45) | 分类名称 |
 
 6. 药物小类Classify:
 
-   | 列名                            | 类型         | 描述     |
-                     | ------------------------------- | ------------ | -------- |
-   | <font color="red">**id**</font> | INT          | 小类编号 |
-   | name                            | VARCHAR(45)  | 小类名称 |
-   | classify_id                     | VARCHAR(100) | 查询用id |
-   | <font color="green">**class_id**</font>    | INT          | 分类编号 |
+   | 列名                                    | 类型         | 描述     |
+         | --------------------------------------- | ------------ | -------- |
+   | <font color="red">**id**</font>         | INT          | 小类编号 |
+   | name                                    | VARCHAR(45)  | 小类名称 |
+   | classify_id                             | VARCHAR(100) | 查询用id |
+   | <font color="green">**class_id**</font> | INT          | 分类编号 |
 
 7. 药物信息Drug：
 
-   | 列名                            | 类型         | 描述     |
-         | ---- | ---- | ---- |
-   | <font color="red">**id**</font> | INT          | 药物编号 |
-   | name | VARCHAR(450) | 药物名称 |
-   | <font color="green">**classId**</font> | INT | 大类编号 |
-   | drugId | VARCHAR(800) | 药物ID |
-   | specification | VARCHAR(1000) | 规格 |
-   | form | VARCHAR(450) | 剂型 |
-   | approvalNumber | VARCHAR(1000) | 批准编号 |
-   | executiveStandard | VARCHAR(1000) | 执行标准 |
-   | producer | VARCHAR(1000) | 生产厂家 |
-   | indication | VARCHAR(1000) | 适应症 |
-   | component | VARCHAR(1000) | 主要成分 |
-   | interact | VARCHAR(1000) | 药物相互作用 |
-   | properties | VARCHAR(1000) | 性状 |
-   | number | INT | 数量 |
-   | price | FLOAT | 价格 |
-   | validityTime | VARCHAR(100) | 有效期 |
-   | usageConsumption | VARCHAR(1000) | 用法用量     |
-   | taboo | VARCHAR(1000) | 禁忌 |
-   | adverseReaction | BLOB | 不良反应 |
-   | storeUp | VARCHAR(1000) | 贮藏 |
-   | matters | VARCHAR(1000) | 注意事项 |
+   | 列名                                   | 类型          | 描述         |
+      | -------------------------------------- | ------------- | ------------ |
+   | <font color="red">**id**</font>        | INT           | 药物编号     |
+   | name                                   | VARCHAR(450)  | 药物名称     |
+   | <font color="green">**classId**</font> | INT           | 大类编号     |
+   | drugId                                 | VARCHAR(800)  | 药物ID       |
+   | specification                          | VARCHAR(1000) | 规格         |
+   | form                                   | VARCHAR(450)  | 剂型         |
+   | approvalNumber                         | VARCHAR(1000) | 批准编号     |
+   | executiveStandard                      | VARCHAR(1000) | 执行标准     |
+   | producer                               | VARCHAR(1000) | 生产厂家     |
+   | indication                             | VARCHAR(1000) | 适应症       |
+   | component                              | VARCHAR(1000) | 主要成分     |
+   | interact                               | VARCHAR(1000) | 药物相互作用 |
+   | properties                             | VARCHAR(1000) | 性状         |
+   | number                                 | INT           | 数量         |
+   | price                                  | FLOAT         | 价格         |
+   | validityTime                           | VARCHAR(100)  | 有效期       |
+   | usageConsumption                       | VARCHAR(1000) | 用法用量     |
+   | taboo                                  | VARCHAR(1000) | 禁忌         |
+   | adverseReaction                        | BLOB          | 不良反应     |
+   | storeUp                                | VARCHAR(1000) | 贮藏         |
+   | matters                                | VARCHAR(1000) | 注意事项     |
+
+8. 申请Apply：
+
+   | 列名                                         | 类型 | 描述         |
+      | -------------------------------------------- | ---- | ------------ |
+   | <font color="red">**id**</font>              | INT  | 申请编号     |
+   | <font color="green">**researcher_id**</font> | INT  | 研究员编号   |
+   | <font color="green">**drug_id**</font>       | INT  | 药物编号     |
+   | number                                       | INT  | 实验药物数量 |
+   | status                                       | INT  | 申请状态     |
+
+9. 研究报告Report：
+
+   | 列名                                         | 类型         | 描述       |
+      | -------------------------------------------- | ------------ | ---------- |
+   | <font color="red">**id**</font>              | INT          | 报告编号   |
+   | <font color="green">**researcher_id**</font> | INT          | 研究员编号 |
+   | title                                        | VARCHAR(45)  | 报告题目   |
+   | content                                      | BLOB         | 报告内容   |
+   | time                                         | DATETIME     | 提交时间   |
+   | appendix                                     | VARCHAR(200) | 附件       |
+   | inspector_id                                 | INT          | 监察员编号 |
+
+10.
 
 ## 接口设计
 
@@ -189,12 +213,12 @@
 
 ```json
 {
-   "name": "",
-   "phone": "",
-   "mail": "",
-   "identity": "",
-   "verificationCode": "",
-   "password": ""
+  "name": "",
+  "phone": "",
+  "mail": "",
+  "identity": "",
+  "verificationCode": "",
+  "password": ""
 }
 ```
 
@@ -251,10 +275,10 @@
 ```json
 {
   "classes": [
-     {
-        "id": "",
-        "name": ""
-     }
+    {
+      "id": "",
+      "name": ""
+    }
   ]
 }
 ```
@@ -285,11 +309,11 @@
 
 ```json
 {
-   "drugs": [
-      {
-         "id": "",
-         "name": "",
-         "drugId": "",
+  "drugs": [
+    {
+      "id": "",
+      "name": "",
+      "drugId": "",
       "specification": "",
       "form": "",
       "executiveStandard": "",
@@ -305,10 +329,10 @@
       "useConsumption": "",
       "taboo": "",
       "adverseReaction": "",
-         "storeUp": "",
-         "matters": ""
-      }
-   ]
+      "storeUp": "",
+      "matters": ""
+    }
+  ]
 }
 ```
 
@@ -322,21 +346,22 @@
 | 参数名      | 参数值 | 类型   |
 | ----------- | ------ | ------ |
 | status      | 1      | number |
-| <font color="blue">researcherId</font> |        | <font color="blue">number</font> |
+| <font color="blue">researcherId</font> |
+| <font color="blue">number</font> |
 
 - 数据返回：
 
 ```json
 {
-   "applyList": [
-      {
-         "id": "",
-         "researcher": "",
-         "drug": "",
-         "number": "",
-         "status": ""
-      }
-   ]
+  "applyList": [
+    {
+      "id": "",
+      "researcher": "",
+      "drug": "",
+      "number": "",
+      "status": ""
+    }
+  ]
 }
 ```
 
@@ -358,10 +383,10 @@
 
 ```json
 {
-   "researcher_id": "",
-   "drug_id": "",
-   "number": "",
-   "status": ""
+  "researcher_id": "",
+  "drug_id": "",
+  "number": "",
+  "status": ""
 }
 ```
 
@@ -380,18 +405,43 @@
 
 ```json
 {
-   "applyList": [
-      {
-         "id": "",
-         "researcher": "",
-         "drug": "",
-            "number":"",
-            "status":""
-        }
-    ]
+  "applyList": [
+    {
+      "id": "",
+      "researcher": "",
+      "drug": "",
+      "number": "",
+      "status": ""
+    }
+  ]
 }
 ```
 
+3. 药物重定位：
+4. 撰写研究报告：/api/researcher/report
+
+- 数据接收：
+
+```json
+{
+	"researcher_id":"",
+    "inspetor_id":"",
+    "title":"",
+    "content":"",
+    "time":"",
+    "appendix":""
+}
+```
+
+- 数据返回：
+
+| 参数名 | 参数值 | 类型   |
+| ------ | ------ | ------ |
+| result |        | string |
+
 ### 监察员界面
 
+1.
+
 ### 质控员界面
+

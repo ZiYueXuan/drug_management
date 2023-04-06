@@ -18,4 +18,7 @@ public interface InspectorMapper {
             "VALUES(#{name},#{password},#{phone},#{mail})")
     @Options(useGeneratedKeys = true, keyProperty = "id")
     void insert(Inspector inspector);
+
+    @Select("SELECT * FROM `inspector` WHERE `id` = #{id}")
+    Inspector getInspectorById(int id);
 }

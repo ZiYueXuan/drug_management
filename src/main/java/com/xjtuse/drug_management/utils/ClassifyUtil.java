@@ -2,11 +2,13 @@ package com.xjtuse.drug_management.utils;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.xjtuse.drug_management.domain.pojo.Classify;
-import com.xjtuse.drug_management.domain.vo.ClassifyVo;
+import com.xjtuse.drug_management.domain.vo.ClassifyVO;
 
 import java.io.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 public class ClassifyUtil {
     //获取药物大类
@@ -23,16 +25,16 @@ public class ClassifyUtil {
     }
 
     //获取药物小类
-    public static List<ClassifyVo> getClassifyVo(JSONObject jsonObject){
-        List<ClassifyVo> classifyVoList = new ArrayList<>();
+    public static List<ClassifyVO> getClassifyVo(JSONObject jsonObject) {
+        List<ClassifyVO> classifyVoList = new ArrayList<>();
         JSONObject data = jsonObject.getJSONObject("data");
         JSONArray jsonArray = data.getJSONArray("data");
-        for (int i=0;i<jsonArray.size();i++){
+        for (int i = 0; i < jsonArray.size(); i++) {
             JSONObject jsonObjectI = jsonArray.getJSONObject(i);
             String classifyName = jsonObjectI.getString("classify");
             String classifyId = jsonObjectI.getString("classifyId");
             String classZ = jsonObjectI.getString("classz");
-            ClassifyVo classifyVo = new ClassifyVo(classifyName,classifyId,classZ);
+            ClassifyVO classifyVo = new ClassifyVO(classifyName, classifyId, classZ);
             classifyVoList.add(classifyVo);
         }
         return classifyVoList;

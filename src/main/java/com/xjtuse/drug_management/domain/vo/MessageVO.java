@@ -7,11 +7,8 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class RegisterVo {
+public class MessageVO {
+    private long id;
     private String name;
-    private String phone;
-    private String mail;
-    private int identity;
-    private String verificationCode;
-    private String password;
+    private String result;
 }

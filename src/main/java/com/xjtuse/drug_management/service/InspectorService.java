@@ -8,4 +8,6 @@ public interface InspectorService {
     Inspector getInspectorByMail(String mail);
 
     void insert(Inspector inspector);
+
+    Inspector getInspectorById(int inspector_id);
 }
