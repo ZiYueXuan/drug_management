@@ -5,17 +5,22 @@ import com.xjtuse.drug_management.domain.vo.ApplyVO;
 import com.xjtuse.drug_management.domain.vo.ReportVO;
 import com.xjtuse.drug_management.service.*;
 import org.jetbrains.annotations.NotNull;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/researcher")
 public class ResearcherController {
+    @Value("${upload.static.url}")
+    private String uploadStaticUrl;
+
     @Resource
     private ApplyService applyService;
     @Resource
@@ -27,7 +32,7 @@ public class ResearcherController {
     @Resource
     private ReportService reportService;
 
-    @PostMapping("/researcher/drugApply")
+    @PostMapping("/drugApply")
     public String drugApply(@NotNull @RequestParam ApplyVO applyVO) {
         Researcher researcher = researcherService.getResearcherById(applyVO.getResearcherId());
         Drug drug = drugService.getDrugById(applyVO.getDrugId());
@@ -37,12 +42,12 @@ public class ResearcherController {
         return "实验药物已申请";
     }
 
-    @PostMapping("/researcher/getApplies")
+    @PostMapping("/getApplies")
     public List<Apply> getApplies(@RequestParam int researcherId) {
         return applyService.getApplies(researcherId);
     }
 
-    @PostMapping("/researcher/getApplies")
+    @PostMapping("/getApplies")
     public List<Apply> getApplies(@RequestParam int researcherId, @RequestParam int status) {
         return applyService.getApplies(researcherId, status);
     }
@@ -51,7 +56,26 @@ public class ResearcherController {
      * 这里差一个实现药物重定位的接口
      */
 
-    @PostMapping("/api/researcher/createReport")
+
+    @PostMapping("/getInspectors")
+    public List<Inspector> getInspectors() {
+        return inspectorService.getInspectors();
+    }
+
+    //附件上传
+    @PostMapping("/addAppendix")
+    public String addAppendix(@RequestParam("file") MultipartFile file) {
+        String result = "";
+        if (file.isEmpty()) {
+            result = "文件不能为空！！！";
+        } else {
+            String fileName = file.getOriginalFilename();
+            result = uploadStaticUrl + fileName;
+        }
+        return result;
+    }
+
+    @PostMapping("/createReport")
     public String createReport(@NotNull ReportVO reportVO) {
         Researcher researcher = researcherService.getResearcherById(reportVO.getResearcher_id());
         Inspector inspector = inspectorService.getInspectorById(reportVO.getInspector_id());

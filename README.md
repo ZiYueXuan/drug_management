@@ -405,7 +405,7 @@
 
 ```json
 {
-  "applyList": [
+  "applies": [
     {
       "id": "",
       "researcher": "",
@@ -418,7 +418,46 @@
 ```
 
 3. 药物重定位：
-4. 撰写研究报告：/api/researcher/report
+4. 获取监察员：/api/researcher/getInspectors
+
+- 数据接收：无
+- 数据返回：
+
+```json
+{
+    "inspetors":[
+        {
+            "id":"",
+            "name":"",
+            "password":"",
+            "phone":"",
+            "mail":""
+        }
+    ]
+}
+```
+
+- 要求：前端将监察员姓名以下拉列表形式展示
+
+5. 附件上传：/api/researcher/addAppendix
+
+- 数据接收：
+
+```json
+{
+    "file":""
+}
+```
+
+- 数据返回：
+
+| 参数名 | 参数值 | 类型   |
+| ------ | ------ | ------ |
+| result |        | string |
+
+- 要求：上传的附件最大不超过20MB
+
+6. 撰写研究报告：/api/researcher/report
 
 - 数据接收：
 

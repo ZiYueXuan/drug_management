@@ -2,6 +2,8 @@ package com.xjtuse.drug_management.service;
 
 import com.xjtuse.drug_management.domain.pojo.Inspector;
 
+import java.util.List;
+
 public interface InspectorService {
     Inspector getInspectorByPhone(String phone);
 
@@ -10,4 +12,6 @@ public interface InspectorService {
     void insert(Inspector inspector);
 
     Inspector getInspectorById(int inspector_id);
+
+    List<Inspector> getInspectors();
 }

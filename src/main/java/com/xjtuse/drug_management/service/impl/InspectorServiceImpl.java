@@ -6,6 +6,7 @@ import com.xjtuse.drug_management.service.InspectorService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @Service
 public class InspectorServiceImpl implements InspectorService {
@@ -30,5 +31,10 @@ public class InspectorServiceImpl implements InspectorService {
     @Override
     public Inspector getInspectorById(int inspector_id) {
         return inspectorMapper.getInspectorById(inspector_id);
+    }
+
+    @Override
+    public List<Inspector> getInspectors() {
+        return inspectorMapper.getInspectors();
     }
 }

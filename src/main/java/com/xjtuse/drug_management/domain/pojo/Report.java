@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 
 @Data
 @NoArgsConstructor
@@ -14,7 +14,7 @@ public class Report {
     private Researcher researcher;
     private String title;
     private String content;
-    private Date time;
+    private Timestamp time;
     private String appendix;
     private Inspector inspector;
 }
