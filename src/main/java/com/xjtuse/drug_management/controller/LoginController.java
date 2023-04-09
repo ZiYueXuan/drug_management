@@ -10,8 +10,8 @@ import com.xjtuse.drug_management.service.ControllerService;
 import com.xjtuse.drug_management.service.InspectorService;
 import com.xjtuse.drug_management.service.ManagerService;
 import com.xjtuse.drug_management.service.ResearcherService;
+import com.xjtuse.drug_management.utils.DESUtil;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,6 +21,8 @@ import javax.annotation.Resource;
 @RequestMapping("/api")
 public class LoginController {
     private MessageVO messageVo;
+
+    private final String key = "drug_management";
 
     @Resource
     private ManagerService managerService;
@@ -32,7 +34,7 @@ public class LoginController {
     private ControllerService controllerService;
 
     @PostMapping("/login")
-    public MessageVO login(@RequestBody LoginVO loginVo) {
+    public MessageVO login(LoginVO loginVo) {
         int identity = loginVo.getIdentity();
         int way = loginVo.getWay();
         String password = loginVo.getPassword();
@@ -115,7 +117,8 @@ public class LoginController {
     }
 
     private void checkManager(String password, Manager manager) {
-        if (manager.getPassword().equals(password)) {
+        String plain = DESUtil.decrypt(key, manager.getPassword());
+        if (plain != null && plain.equals(password)) {
             messageVo = new MessageVO(manager.getId(), manager.getName(), "登录成功！");
         } else {
             messageVo = new MessageVO(0, "", "用户名或密码错误");
@@ -131,7 +134,8 @@ public class LoginController {
     }
 
     private void checkInspector(String password, Inspector inspector) {
-        if (inspector.getPassword().equals(password)) {
+        String plain = DESUtil.decrypt(key, inspector.getPassword());
+        if (plain != null && plain.equals(password)) {
             messageVo = new MessageVO(inspector.getId(), inspector.getName(), "登录成功！");
         } else {
             messageVo = new MessageVO(0, "", "用户名或密码错误!!!");
@@ -139,7 +143,8 @@ public class LoginController {
     }
 
     private void checkController(String password, Controller controller) {
-        if (controller.getPassword().equals(password)) {
+        String plain = DESUtil.decrypt(key, controller.getPassword());
+        if (plain != null && plain.equals(password)) {
             messageVo = new MessageVO(controller.getId(), controller.getName(), "登录成功！");
         } else {
             messageVo = new MessageVO(0, "", "用户名或密码错误!!!");

@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SerializerFeature;
+import com.xjtuse.drug_management.domain.pojo.Class;
 import com.xjtuse.drug_management.domain.pojo.Drug;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.http.HttpResponse;
@@ -69,7 +70,8 @@ public class DrugUtil {
                         String adverseReaction = jsonObjectI.getString("blfy");
                         String storeUp = jsonObjectI.getString("zc");
                         String matters = jsonObjectI.getString("zysx");
-                        Drug drug = new Drug(1, name, 1, drugId, specification,
+                        Class c = new Class(0, "");
+                        Drug drug = new Drug(1, name, c, drugId, specification,
                                 form, approvalNumber, executiveStandard, producer,
                                 indication, component, interact, properties, number,
                                 price, validityTime, usageConsumption, taboo,

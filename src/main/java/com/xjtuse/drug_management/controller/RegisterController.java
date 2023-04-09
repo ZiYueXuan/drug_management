@@ -12,6 +12,7 @@ import com.xjtuse.drug_management.domain.vo.RegisterVO;
 import com.xjtuse.drug_management.service.ControllerService;
 import com.xjtuse.drug_management.service.InspectorService;
 import com.xjtuse.drug_management.service.ResearcherService;
+import com.xjtuse.drug_management.utils.DESUtil;
 import com.xjtuse.drug_management.utils.RandomUtil;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -108,6 +109,7 @@ public class RegisterController {
 
     @PostMapping("/register")
     public String register(RegisterVO registerVo) {
+        String key = "drug_management";
         String result = "注册成功！";
         String code = registerVo.getVerificationCode();
         int identity = registerVo.getIdentity();
@@ -120,7 +122,8 @@ public class RegisterController {
                     if (researcherService.getResearcherByPhone(phone) == null) {
                         String name = registerVo.getName();
                         String password = registerVo.getPassword();
-                        Researcher researcher = new Researcher(1, name, password, phone, "");
+                        String cipher = DESUtil.encrypt(key, password);
+                        Researcher researcher = new Researcher(1, name, cipher, phone, "");
                         researcherService.insert(researcher);
                     } else {
                         result = "您已注册，请登录！";
@@ -131,7 +134,8 @@ public class RegisterController {
                     if (researcherService.getResearcherByMail(mail) == null) {
                         String name = registerVo.getName();
                         String password = registerVo.getPassword();
-                        Researcher researcher = new Researcher(1, name, password, "", mail);
+                        String cipher = DESUtil.encrypt(key, password);
+                        Researcher researcher = new Researcher(1, name, cipher, "", mail);
                         researcherService.insert(researcher);
                     } else {
                         result = "您已注册，请登录！";
@@ -143,7 +147,8 @@ public class RegisterController {
                     if (inspectorService.getInspectorByPhone(phone) == null) {
                         String name = registerVo.getName();
                         String password = registerVo.getPassword();
-                        Inspector inspector = new Inspector(1, name, password, phone, "");
+                        String cipher = DESUtil.encrypt(key, password);
+                        Inspector inspector = new Inspector(1, name, cipher, phone, "");
                         inspectorService.insert(inspector);
                     } else {
                         result = "您已注册，请登录！";
@@ -154,7 +159,8 @@ public class RegisterController {
                     if (inspectorService.getInspectorByMail(mail) == null) {
                         String name = registerVo.getName();
                         String password = registerVo.getPassword();
-                        Inspector inspector = new Inspector(1, name, password, "", mail);
+                        String cipher = DESUtil.encrypt(key, password);
+                        Inspector inspector = new Inspector(1, name, cipher, "", mail);
                         inspectorService.insert(inspector);
                     } else {
                         result = "您已注册，请登录！";
@@ -166,7 +172,8 @@ public class RegisterController {
                     if (controllerService.getControllerByPhone(phone) == null) {
                         String name = registerVo.getName();
                         String password = registerVo.getPassword();
-                        Controller controller = new Controller(1, name, password, phone, "");
+                        String cipher = DESUtil.encrypt(key, password);
+                        Controller controller = new Controller(1, name, cipher, phone, "");
                         controllerService.insert(controller);
                     } else {
                         result = "您已注册，请登录！";
@@ -177,7 +184,8 @@ public class RegisterController {
                     if (controllerService.getControllerByMail(mail) == null) {
                         String name = registerVo.getName();
                         String password = registerVo.getPassword();
-                        Controller controller = new Controller(1, name, password, "", mail);
+                        String cipher = DESUtil.encrypt(key, password);
+                        Controller controller = new Controller(1, name, cipher, "", mail);
                         controllerService.insert(controller);
                     } else {
                         result = "您已注册，请登录！";
