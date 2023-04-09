@@ -13,5 +13,5 @@ public interface ApplyService {
 
     List<Apply> getApplies();
 
-    void updateStatus(Apply apply);
+    void updateStatus(Apply apply, int status);
 }

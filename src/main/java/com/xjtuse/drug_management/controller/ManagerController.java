@@ -16,7 +16,7 @@ import javax.annotation.Resource;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/manager")
 public class ManagerController {
     @Resource
     private ClassService classService;
@@ -25,12 +25,12 @@ public class ManagerController {
     @Resource
     private ApplyService applyService;
 
-    @PostMapping("/manager/getRepositories")
+    @PostMapping("/getRepositories")
     public List<Class> getRepositories() {
         return classService.getAll();
     }
 
-    @PostMapping("/manager/addRepository")
+    @PostMapping("/addRepository")
     public String addRepository(String className) {
         String result = "药物信息库已建立";
         Class c = new Class(1, className);
@@ -38,22 +38,30 @@ public class ManagerController {
         return result;
     }
 
-    @PostMapping("/manager/getDrugs")
+    @PostMapping("/getDrugs")
     public List<Drug> getDrugs(int classId) {
         return drugService.getDrugByClass(classId);
     }
 
-    @PostMapping("/manager/getApplies")
+    @PostMapping("/getApplies")
     public List<Apply> getApplies() {
-        return applyService.getApplies();
+        List<Apply> applies = applyService.getApplies();
+        for (Apply apply : applies) {
+            applyService.updateStatus(apply, 2);
+        }
+        return applies;
     }
 
-    @PostMapping("/manager/getApplies")
-    public List<Apply> getApplies(@RequestParam int researcherId, @RequestParam int status) {
-        return applyService.getApplies(researcherId, status);
+    @PostMapping("/getApplies")
+    public List<Apply> getApplies(@RequestParam int researcherId) {
+        List<Apply> applies = applyService.getApplies(researcherId);
+        for (Apply apply : applies) {
+            applyService.updateStatus(apply, 2);
+        }
+        return applies;
     }
 
-    @PostMapping("/manager/exeApply")
+    @PostMapping("/exeApply")
     public String exeApply(@NotNull Apply apply) {
         Drug drug = apply.getDrug();
         int number = apply.getNumber();
@@ -61,7 +69,7 @@ public class ManagerController {
         if (drug.getNumber() > number) {
             drugService.updateNumber(drug, number);
         }
-        applyService.updateStatus(apply);
+        applyService.updateStatus(apply, 3);
         return "药品" + drug.getName() + "已发放";
     }
 }

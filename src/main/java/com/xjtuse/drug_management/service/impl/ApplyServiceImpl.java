@@ -34,7 +34,7 @@ public class ApplyServiceImpl implements ApplyService {
     }
 
     @Override
-    public void updateStatus(Apply apply) {
-        applyMapper.updateStatus(apply);
+    public void updateStatus(Apply apply, int status) {
+        applyMapper.updateStatus(apply, status);
     }
 }

@@ -37,6 +37,6 @@ public interface ApplyMapper {
     @Results(id = "applyMapper")
     List<Apply> getApplies();
 
-    @Update("UPDATE `apply` SET `status` = ${3} WHERE `id` = #{apply.id}")
-    void updateStatus(Apply apply);
+    @Update("UPDATE `apply` SET `status` = #{status} WHERE `id` = #{apply.id}")
+    void updateStatus(Apply apply, int status);
 }
