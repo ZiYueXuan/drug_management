@@ -9,11 +9,11 @@ import java.sql.Date;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Apply {
+public class InspectorExamine {
     private int id;
-    private Researcher researcher;
-    private Drug drug;
+    private Report report;
+    private String status;
+    private String opinion;
     private Date time;
-    private int number;
-    private int status;
+    private Controller controller;
 }

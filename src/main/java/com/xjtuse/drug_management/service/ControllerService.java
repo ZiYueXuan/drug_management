@@ -8,4 +8,6 @@ public interface ControllerService {
     Controller getControllerByMail(String mail);
 
     void insert(Controller controller);
+
+    Controller getControllerById(int controllerId);
 }

@@ -36,7 +36,7 @@ public class ResearcherController {
     public String drugApply(@NotNull @RequestParam ApplyVO applyVO) {
         Researcher researcher = researcherService.getResearcherById(applyVO.getResearcherId());
         Drug drug = drugService.getDrugById(applyVO.getDrugId());
-        Apply apply = new Apply(1, researcher, drug,
+        Apply apply = new Apply(1, researcher, drug, applyVO.getTime(),
                 applyVO.getNumber(), applyVO.getStatus());
         applyService.insert(apply);
         return "实验药物已申请";

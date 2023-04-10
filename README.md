@@ -59,7 +59,6 @@
 <div style="text-align: center;">
 <img src="https://gitee.com/ziyuexuan/image/raw/master/https://gitee.com/ziyuexuan/image/controller.png" alt="image-20230327143253272" style="width:750px" />
 </div>
-
 ## 数据库设计
 
 ### E-R图
@@ -151,26 +150,38 @@
 8. 申请Apply：
 
    | 列名                                         | 类型 | 描述         |
-                  | -------------------------------------------- | ---- | ------------ |
+   | -------------------------------------------- | ---- | ------------ |
    | <font color="red">**id**</font>              | INT  | 申请编号     |
    | <font color="green">**researcher_id**</font> | INT  | 研究员编号   |
    | <font color="green">**drug_id**</font>       | INT  | 药物编号     |
+   | time                                         | DATE | 申请日期     |
    | number                                       | INT  | 实验药物数量 |
    | status                                       | INT  | 申请状态     |
 
 9. 研究报告Report：
 
    | 列名                                         | 类型         | 描述       |
-            | -------------------------------------------- | ------------ | ---------- |
+      | -------------------------------------------- | ------------ | ---------- |
    | <font color="red">**id**</font>              | INT          | 报告编号   |
    | <font color="green">**researcher_id**</font> | INT          | 研究员编号 |
    | title                                        | VARCHAR(45)  | 报告题目   |
    | content                                      | BLOB         | 报告内容   |
    | time                                         | DATETIME     | 提交时间   |
    | appendix                                     | VARCHAR(200) | 附件       |
-   | <font color="green">**inspector_id**</font>> | INT          | 监察员编号 |
+   | <font color="green">**inspector_id**</font>  | INT          | 监察员编号 |
 
-10.
+10. 研究报告初审Inspector_examine：
+
+    | 列名                                         | 类型         | 描述       |
+        | -------------------------------------------- | ------------ | ---------- |
+    | <font color="red">**id**</font>              | INT          | 初审编号   |
+    | <font color="green">**report_id**</font>     | INT          | 报告编号   |
+    | status                                       | VARCHAR(20)  | 状态       |
+    | opinion                                      | VARCHAR(500) | 审核意见   |
+    | time                                         | DATE         | 审核时间   |
+    | <font color="green">**controller_id**</font> | INT          | 质检员编号 |
+
+11.
 
 ## 接口设计
 
@@ -352,15 +363,16 @@
 
 ```json
 {
-  "applyList": [
-    {
-      "id": "",
-      "researcher": "",
-      "drug": "",
-      "number": "",
-      "status": ""
-    }
-  ]
+    "applyList": [
+        {
+            "id": "",
+            "researcher": "",
+            "drug": "",
+            "time","",
+            "number": "",
+            "status": ""
+        }
+    ]
 }
 ```
 
@@ -382,10 +394,11 @@
 
 ```json
 {
-  "researcher_id": "",
-  "drug_id": "",
-  "number": "",
-  "status": ""
+    "researcher_id": "",
+    "drug_id": "",
+    "time":"",
+    "number": "",
+    "status": ""
 }
 ```
 
@@ -404,15 +417,16 @@
 
 ```json
 {
-  "applies": [
-    {
-      "id": "",
-      "researcher": "",
-      "drug": "",
-      "number": "",
-      "status": ""
-    }
-  ]
+    "applies": [
+        {
+            "id": "",
+            "researcher": "",
+            "drug": "",
+            "time":"",
+            "number": "",
+            "status": ""
+        }
+    ]
 }
 ```
 
@@ -430,15 +444,15 @@
 
 ```json
 {
-  "inspectors": [
-    {
-      "id": "",
-      "name": "",
-      "password": "",
-      "phone": "",
-      "mail": ""
-    }
-  ]
+    "inspectors": [
+        {
+            "id": "",
+            "name": "",
+            "password": "",
+            "phone": "",
+            "mail": ""
+        }
+    ]
 }
 ```
 
@@ -485,7 +499,52 @@
 
 ### 监察员界面
 
-1.
+1. 获取研究报告：/api/inspector/getReportys
+
+- 数据接收：
+
+| 参数名      | 参数值       | 类型   |
+| ----------- | ------------ | ------ |
+| inspectorId | 当前监察员id | number |
+
+- 数据返回：
+
+```json
+{
+    "reports":[
+        {
+            "researcher_id": "",
+            "inspetor_id": "",
+            "title": "",
+            "content": "",
+            "time": "",
+            "appendix": ""
+        }
+    ]
+}
+```
+
+2. 研究报告初审：/api/inspector/examineReport
+
+- 数据接收：
+
+```json
+{
+    "report_id":"",
+    "status":"",
+    "opinion":"",
+    "time":"",
+    "controller_id"
+}
+```
+
+- 数据返回：无
+
+3. 药物重定位检测：
 
 ### 质控员界面
+
+1. 研究报告终审：
+2. 药物有效期管理：
+3. 资料补档：
 

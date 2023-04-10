@@ -23,6 +23,11 @@ public class ControllerServiceImpl implements ControllerService {
     }
 
     @Override
+    public Controller getControllerById(int controllerId) {
+        return controllerMapper.getControllerById(controllerId);
+    }
+
+    @Override
     public void insert(Controller controller) {
         controllerMapper.insert(controller);
     }

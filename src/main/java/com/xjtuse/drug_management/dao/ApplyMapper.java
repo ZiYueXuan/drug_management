@@ -9,8 +9,8 @@ import java.util.List;
 
 @Mapper
 public interface ApplyMapper {
-    @Insert("INSERT INTO `apply`(`researcher_id`,`drug_id`,`number`,`status`)" +
-            "VALUES (#{researcher.id},#{drug.id},#{number},#{status})")
+    @Insert("INSERT INTO `apply`(`researcher_id`,`drug_id`,`time`,`number`,`status`)" +
+            "VALUES (#{researcher.id},#{drug.id},#{time},#{number},#{status})")
     @Options(useGeneratedKeys = true, keyProperty = "id")
     void insert(Apply apply);
 

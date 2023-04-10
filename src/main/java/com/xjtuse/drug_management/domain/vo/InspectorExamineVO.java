@@ -9,11 +9,10 @@ import java.sql.Date;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ApplyVO {
-    private int researcherId;
-    private int drugId;
+public class InspectorExamineVO {
+    private int reportId;
+    private int controllerId;
+    private String status;
+    private String opinion;
     private Date time;
-    private int number;
-    // 1-已申请 2-已阅读 3-已发放
-    private int status;
 }
