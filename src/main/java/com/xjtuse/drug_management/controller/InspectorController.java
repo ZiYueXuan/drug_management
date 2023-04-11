@@ -26,6 +26,11 @@ public class InspectorController {
     @Resource
     private ReportService reportService;
 
+    @PostMapping("/getControllers")
+    public List<Controller> getControllers() {
+        return controllerService.getControllers();
+    }
+
     @PostMapping("/getReports")
     public List<Report> getReports(@RequestParam int inspectorId) {
         return reportService.getReports(inspectorId);

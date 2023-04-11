@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.xjtuse.drug_management.domain.vo.ClassifyVO;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -46,10 +47,10 @@ public class ClassifyUtil {
         File jsonFile = new File(filename);
         try {
             FileReader fileReader = new FileReader(jsonFile);
-            Reader reader = new InputStreamReader(new FileInputStream(jsonFile),"utf-8");
-            int ch = 0;
+            Reader reader = new InputStreamReader(new FileInputStream(jsonFile), StandardCharsets.UTF_8);
+            int ch;
             StringBuilder stringBuilder = new StringBuilder();
-            while ((ch = reader.read()) != -1){
+            while ((ch = reader.read()) != -1) {
                 stringBuilder.append((char) ch);
             }
             fileReader.close();

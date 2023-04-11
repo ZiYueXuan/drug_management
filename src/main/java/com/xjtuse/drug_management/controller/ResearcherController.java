@@ -65,7 +65,7 @@ public class ResearcherController {
     //附件上传
     @PostMapping("/addAppendix")
     public String addAppendix(@RequestParam("file") MultipartFile file) {
-        String result = "";
+        String result;
         if (file.isEmpty()) {
             result = "文件不能为空！！！";
         } else {

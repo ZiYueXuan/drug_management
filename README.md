@@ -14,6 +14,8 @@
 
 ### 前端部分
 
+- React
+
 ### 后端部分
 
 - SpringBoot
@@ -173,7 +175,7 @@
 10. 研究报告初审Inspector_examine：
 
     | 列名                                         | 类型         | 描述       |
-        | -------------------------------------------- | ------------ | ---------- |
+                    | -------------------------------------------- | ------------ | ---------- |
     | <font color="red">**id**</font>              | INT          | 初审编号   |
     | <font color="green">**report_id**</font>     | INT          | 报告编号   |
     | status                                       | VARCHAR(20)  | 状态       |
@@ -181,7 +183,15 @@
     | time                                         | DATE         | 审核时间   |
     | <font color="green">**controller_id**</font> | INT          | 质检员编号 |
 
-11.
+11. 研究报告复审Controller_examine：
+
+    | 列名                                      | 类型         | 描述     |
+                | ----------------------------------------- | ------------ | -------- |
+    | <font color="red">**id**</font>           | INT          | 初审编号 |
+    | <font color="green">**examine_id**</font> | INT          | 初审编号 |
+    | status                                    | VARCHAR(20)  | 状态     |
+    | opinion                                   | VARCHAR(500) | 审核意见 |
+    | time                                      | DATE         | 审核时间 |
 
 ## 接口设计
 
@@ -367,9 +377,9 @@
         {
             "id": "",
             "researcher": "",
-            "drug": "",
-            "time","",
-            "number": "",
+          "drug": "",
+          "time": "",
+          "number": "",
             "status": ""
         }
     ]
@@ -499,7 +509,27 @@
 
 ### 监察员界面
 
-1. 获取研究报告：/api/inspector/getReportys
+1. 获取质检员信息：/api/inspector/getControllers
+
+- 数据接收：无
+
+- 数据返回：
+
+```json
+{
+  "controllers": [
+    {
+      "id": "",
+      "name": "",
+      "password": "",
+      "phone": "",
+      "mail": ""
+    }
+  ]
+}
+```
+
+2. 获取研究报告：/api/inspector/getReports
 
 - 数据接收：
 
@@ -524,7 +554,7 @@
 }
 ```
 
-2. 研究报告初审：/api/inspector/examineReport
+3. 研究报告初审：/api/inspector/examineReport
 
 - 数据接收：
 
@@ -533,18 +563,52 @@
     "report_id":"",
     "status":"",
     "opinion":"",
-    "time":"",
-    "controller_id"
+  "time": "",
+  "controller_id": ""
 }
 ```
 
 - 数据返回：无
 
-3. 药物重定位检测：
+4. 药物重定位检测：
 
 ### 质控员界面
 
-1. 研究报告终审：
-2. 药物有效期管理：
+1. 获取研究报告：/api/controller/getExaminedReports
+
+- 数据接收：
+
+| 参数名       | 参数值       | 类型   |
+| ------------ | ------------ | ------ |
+| controllerId | 当前质控员id | number |
+
+- 数据返回：
+
+```json
+{
+  "examinedReports": [
+    {
+      "report": ""
+    }
+  ]
+}
+```
+
+2. 研究报告终审：
+
+- 数据接收：
+
+```json
+{
+  "reportId": "",
+  "status": "",
+  "opinion": "",
+  "time": "",
+  "controllerId": ""
+}
+```
+
+- 数据返回：无
+
 3. 资料补档：
 

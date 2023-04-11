@@ -6,6 +6,8 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Select;
 
+import java.util.List;
+
 @Mapper
 public interface ControllerMapper {
     @Select("SELECT * FROM `controller` WHERE `phone` = #{phone}")
@@ -21,4 +23,7 @@ public interface ControllerMapper {
 
     @Select("SELECT * FROM `controller` WHERE `id` = #{controllerId}")
     Controller getControllerById(int controllerId);
+
+    @Select("SELECT * FROM `controller`")
+    List<Controller> getControllers();
 }
