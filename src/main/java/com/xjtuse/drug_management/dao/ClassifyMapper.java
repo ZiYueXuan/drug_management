@@ -11,7 +11,6 @@ public interface ClassifyMapper {
 
     @Insert("INSERT INTO `classify`(`class_id`,`name`,`classifyId`) " +
             "VALUES (#{c.id},#{name},#{classifyId})")
-    @Results(id = "classifyMapper")
     @Options(useGeneratedKeys = true, keyProperty = "id")
     void insert(Classify classify);
 

@@ -52,7 +52,7 @@ public class ManagerController {
         return applies;
     }
 
-    @PostMapping("/getApplies")
+    @PostMapping("/getAppliesWithResearcher")
     public List<Apply> getApplies(@RequestParam int researcherId) {
         List<Apply> applies = applyService.getApplies(researcherId);
         for (Apply apply : applies) {

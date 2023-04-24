@@ -15,7 +15,7 @@ public interface ReportMapper {
     void insert(Report report);
 
     @Select("SELECT * FROM `report` WHERE `inspector_id` = #{inspectorId}")
-    @Results(id = "reportMapper", value = {
+    @Results(id = "reportMap", value = {
             @Result(property = "researcher",
                     column = "researcher_id",
                     javaType = Researcher.class,
@@ -30,6 +30,6 @@ public interface ReportMapper {
     List<Report> getReports(int inspectorId);
 
     @Select("SELECT * FROM `report` WHERE `id` = #{reportId}")
-    @Results(id = "reportMapper")
+    @ResultMap("reportMap")
     Report getReportById(int reportId);
 }

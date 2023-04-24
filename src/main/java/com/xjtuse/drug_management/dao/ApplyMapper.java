@@ -15,7 +15,7 @@ public interface ApplyMapper {
     void insert(Apply apply);
 
     @Select("SELECT * FROM `apply` WHERE `researcher_id` = #{researcherId}")
-    @Results(id = "applyMapper", value = {
+    @Results(id = "applyMap", value = {
             @Result(property = "researcher",
                     column = "researcher_id",
                     javaType = Researcher.class,
@@ -27,14 +27,14 @@ public interface ApplyMapper {
                     one = @One(select = "com.xjtuse.drug_management.dao.DrugMapper.getDrugById")
             )
     })
-    List<Apply> getApplies(int researcherId);
+    List<Apply> getAppliesWithResearcher(int researcherId);
 
     @Select("SELECT * FROM `apply` WHERE `researcher_id` = #{researcherId} AND `status` = #{status} ")
-    @Results(id = "applyMapper")
-    List<Apply> getApplies(int researcherId, int status);
+    @ResultMap("applyMap")
+    List<Apply> getAppliesWithResearcherAndStatus(int researcherId, int status);
 
     @Select("SELECT * FROM `apply` WHERE `status` = ${1}")
-    @Results(id = "applyMapper")
+    @ResultMap("applyMap")
     List<Apply> getApplies();
 
     @Update("UPDATE `apply` SET `status` = #{status} WHERE `id` = #{apply.id}")

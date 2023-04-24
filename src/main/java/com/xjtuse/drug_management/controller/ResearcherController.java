@@ -5,7 +5,6 @@ import com.xjtuse.drug_management.domain.vo.ApplyVO;
 import com.xjtuse.drug_management.domain.vo.ReportVO;
 import com.xjtuse.drug_management.service.*;
 import org.jetbrains.annotations.NotNull;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,8 +17,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/researcher")
 public class ResearcherController {
-    @Value("${upload.static.url}")
-    private String uploadStaticUrl;
 
     @Resource
     private ApplyService applyService;
@@ -47,7 +44,7 @@ public class ResearcherController {
         return applyService.getApplies(researcherId);
     }
 
-    @PostMapping("/getApplies")
+    @PostMapping("/getAppliesWithStatus")
     public List<Apply> getApplies(@RequestParam int researcherId, @RequestParam int status) {
         return applyService.getApplies(researcherId, status);
     }
@@ -70,6 +67,7 @@ public class ResearcherController {
             result = "文件不能为空！！！";
         } else {
             String fileName = file.getOriginalFilename();
+            String uploadStaticUrl = "upload.static.url";
             result = uploadStaticUrl + fileName;
         }
         return result;

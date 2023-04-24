@@ -20,7 +20,7 @@ public interface DrugMapper {
     void insert(Drug drug);
 
     @Select("SELECT * FROM `drug` WHERE `id` = #{drugId}")
-    @Results(id = "drugMapper", value = {
+    @Results(id = "drugMap", value = {
             @Result(property = "c",
                     column = "class_id",
                     javaType = Class.class,
@@ -30,7 +30,7 @@ public interface DrugMapper {
     Drug getDrugById(int drugId);
 
     @Select("SELECT * FROM `drug` WHERE `classId` = #{classId}")
-    @Results(id = "drugMapper")
+    @ResultMap("drugMap")
     List<Drug> getDrugsByClass(int classId);
 
     @Update("UPDATE `drug` SET `number` = `number` - #{number}  WHERE  `id` = #{drug.id}")
